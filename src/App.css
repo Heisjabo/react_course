@@ -1,0 +1,27 @@
+#root {
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tasks ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.tasks ul li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tasks button{
+  background-color: red;
+  border: none;
+  cursor: pointer;
+}
