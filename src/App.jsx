@@ -2,6 +2,10 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import AddTaskForm from "./components/AddTaskForm";
 import TasksList from "./components/TasksList";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Posts from "./components/Posts";
+import SinglePost from "./components/SinglePost";
+import Shared from "./components/Shared";
 
 const App = () => {
   const [tasks, setTasks] = useState(() => {
@@ -41,12 +45,46 @@ const App = () => {
     setTasks(tasks.filter(task => task.id !== id));
   }
 
+  const posts = [
+    {
+        id: "1",
+        title: 'post 1',
+        description: 'post description 1'
+    },
+    {
+        id: "2",
+        title: 'post 2',
+        description: 'post description 2'
+    },
+    {
+        id: "3",
+        title: 'post 3',
+        description: 'post description 3'
+    }
+];
+
   return (
-    <div>
-      <h1>Task Tracker</h1>
-      <AddTaskForm handleSubmit={handleSubmit} title={title} setTitle={setTitle}/>
-      <TasksList tasks={tasks} deleteTask={deleteTask} toggleTask={toggleTask}/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+
+        <Route path="/" element={<Shared />}>
+          <Route index element={<h1>Home</h1>}></Route>
+        <Route path="/about" element={<h1>About</h1>}></Route>
+        <Route path="/contact" element={<h1>Contact</h1>}></Route>
+        </Route>
+
+        <Route path="/posts" element={<Shared posts={posts}/>}>
+        <Route path="/posts/:id" element={<SinglePost posts={posts} />}></Route>
+        </Route>
+        <Route path="*" element={<h1>Not found</h1>}></Route>
+
+      </Routes>
+    </BrowserRouter>
+    // <div>
+    //   <h1>Task Tracker</h1>
+    //   <AddTaskForm handleSubmit={handleSubmit} title={title} setTitle={setTitle}/>
+    //   <TasksList tasks={tasks} deleteTask={deleteTask} toggleTask={toggleTask}/>
+    // </div>
   );
 };
 
